@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Weather_State">Weather State</string>
+    <string name="Weather_State">حالة الطقس</string>
+    <string name="arabic_language">اللغة العربية</string>
+    <string name="menu_settings">الإعدادات</string>
+    <string name="menu_home">الصفحة الرئيسية</string>
+    <string name="menu_favorite">المفضلة</string>
+    <string name="menu_alert">التنبيهات</string>
+    <string name="language_setting">اللغة</string>
+    <string name="english_language">اللغة الإنجليزية</string>
+    <string name="location_setting">الموقع</string>
+    <string name="gps_location">موقعي الحالي</string>
+    <string name="map_location">الخريطة</string>
 </resources>

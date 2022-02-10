@@ -142,7 +142,7 @@
                 android:gravity="center"
                 tools:text="TextView"
                 android:textSize="20sp"
-                android:textColor="@color/textColor"
+                android:textColor="@color/radioButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -158,7 +158,7 @@
                 android:gravity="center"
                 tools:text="TextView"
                 android:textSize="20sp"
-                android:textColor="@color/textColor"
+                android:textColor="@color/radioButton"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -186,7 +186,7 @@
                 android:gravity="center"
                 tools:text="TextView"
                 android:textSize="20sp"
-                android:textColor="@color/textColor"
+                android:textColor="@color/radioButton"
                 app:layout_constraintEnd_toEndOf="@+id/city_tv"
                 app:layout_constraintStart_toStartOf="@+id/city_tv"
                 app:layout_constraintTop_toBottomOf="@+id/city_tv" />
@@ -233,7 +233,7 @@
             android:fontFamily="@font/amaranth"
             android:text="@string/Weather_State"
             android:textSize="16sp"
-            android:textColor="@color/textColor"
+            android:textColor="@color/radioButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/daily_recyclerView" />
 

@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.shekoo.iweather.databinding.FragmentAlertBinding
 import com.shekoo.iweather.databinding.FragmentSettingBinding
 import com.shekoo.iweather.ui.alert.AlertViewModel
 
 class AlertFragment : Fragment() {
 
-    private var _binding: FragmentSettingBinding? = null
+    private var _binding: FragmentAlertBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,13 +27,9 @@ class AlertFragment : Fragment() {
         val slideshowViewModel =
             ViewModelProvider(this).get(AlertViewModel::class.java)
 
-        _binding = FragmentSettingBinding.inflate(inflater, container, false)
+        _binding = FragmentAlertBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSlideshow
-        slideshowViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 

@@ -1,3 +1,4 @@
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 /*
@@ -11,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-
+@Entity(tableName = "current_table")
 data class Current (
 
 	@SerializedName("dt") val dt : Int,
