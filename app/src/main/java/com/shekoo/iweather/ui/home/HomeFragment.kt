@@ -59,7 +59,6 @@ class HomeFragment : Fragment() {
         observeViewModel()
     }
     private fun observeViewModel() {
-        Log.i(TAG, "observeViewModel: 1")
         homeViewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
             Log.i(TAG, "observeViewModel: 2")
             binding?.tempTv?.text= it.current.temp.toInt().toString()
@@ -68,9 +67,6 @@ class HomeFragment : Fragment() {
                 var link ="http://openweathermap.org/img/wn/"+ it.current?.weather.get(0).icon+"@2x.png"
                 Glide.with(context).load(link).into(binding?.weatherIconIv!!)
             }
-
-            Log.i(TAG, "observeViewModel: "+it.lat)
-            Log.i(TAG, "observeViewModel: "+ it.lon)
             val gcd = Geocoder(context, Locale.getDefault())
             var address: List<Address>?
             try {
@@ -108,19 +104,17 @@ class HomeFragment : Fragment() {
             recyclerViewVertical.adapter = myDailyAdapter
             recyclerViewVertical.layoutManager = layoutManagerForDaily
         })
-        Log.i(TAG, "observeViewModel: 3")
-
     }
 
     private fun initViews() {
-        /*val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
+        val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
         val lat = sharedPreferences.getString(LATITUDE, "60.7392213" )?.toDouble()
         val lon = sharedPreferences.getString(LONGITUDE,"8.3567771")?.toDouble()
         homeViewModel.getWeather(lat!!,lon!!,"metric")
         Log.i(TAG, "initViews: " + lat)
-        Log.i(TAG, "initViews: "+lon)*/
+        Log.i(TAG, "initViews: "+lon)
 
-        homeViewModel.getWeather(60.7392213,8.3567771,"metric")
+        //homeViewModel.getWeather(30.4646308,30.9349903,"metric")
 
     }
 

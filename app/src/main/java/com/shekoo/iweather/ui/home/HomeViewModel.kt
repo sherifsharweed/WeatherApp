@@ -17,8 +17,6 @@ class HomeViewModel : ViewModel() {
     fun getWeather(lat : Double ,lon :Double , units : String) {
         repo.getWeather(lat , lon , units)
         weatherLiveData = repo.weatherLiveData
-        Log.i(TAG, "getWeather: 2"+weatherLiveData.value?.current?.clouds.toString())
-
     }
 
 }

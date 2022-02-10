@@ -1,4 +1,4 @@
-package com.shekoo.iweather
+package com.shekoo.iweather.ui
 
 import android.Manifest
 import android.content.Context
@@ -16,10 +16,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.shekoo.iweather.R
 import com.shekoo.iweather.databinding.ActivityMainBinding
-import com.shekoo.iweather.ui.LOCATION_CODE
-import com.shekoo.iweather.ui.MyLocationListener
-import com.shekoo.iweather.ui.PERMISSIONS
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,27 +36,19 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain2.toolbar)
 
 
-        binding.appBarMain2.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main2)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.nav_favortie, R.id.nav_setting,R.id.nav_alert
-            ), drawerLayout
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_home, R.id.nav_favortie, R.id.nav_setting, R.id.nav_alert), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         //////////get location permissions
-       /* locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         myLocationListener = MyLocationListener(this)
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -68,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             return
         }else{
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F,myLocationListener)
-        }*/
+        }
         //////////////
     }
 
@@ -84,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    /*override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             LOCATION_CODE ->{
@@ -97,5 +87,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }*/
+    }
 }

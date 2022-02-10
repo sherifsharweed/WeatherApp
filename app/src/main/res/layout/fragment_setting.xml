@@ -4,19 +4,163 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/gradint_background"
     tools:context=".ui.setting.SettingFragment">
 
-    <TextView
-        android:id="@+id/text_slideshow"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_height="350dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginBottom="331dp"
+        android:orientation="vertical"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/language_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="2.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:text="@string/language_setting"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/language_radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="2.5dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/roundedcolor3"
+                    android:weightSum="2">
+
+                    <RadioButton
+                        android:id="@+id/english_radiobutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/white"
+                        android:checked="true"
+                        android:fontFamily="@font/amaranth"
+                        android:gravity="center_vertical"
+                        android:text="@string/english_language"
+                        android:textColor="@color/radioButton"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/arabic_radiobutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/white"
+                        android:fontFamily="@font/amaranth"
+                        android:gravity="center_vertical"
+                        android:text="@string/arabic_language"
+                        android:textColor="@color/radioButton"
+                        android:textSize="16sp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/location_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="2.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:text="@string/location_setting"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/location_radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="2.5dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/roundedcolor3"
+                    android:weightSum="2">
+
+                    <RadioButton
+                        android:id="@+id/gps_radiobutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/white"
+                        android:checked="true"
+                        android:fontFamily="@font/amaranth"
+                        android:gravity="center_vertical"
+                        android:text="@string/gps_location"
+                        android:textColor="@color/radioButton"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/map_radiobutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/white"
+                        android:fontFamily="@font/amaranth"
+                        android:gravity="center_vertical"
+                        android:text="@string/map_location"
+                        android:textColor="@color/radioButton"
+                        android:textSize="16sp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
