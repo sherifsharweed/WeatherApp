@@ -1,31 +1,38 @@
-package com.shekoo.iweather.ui.home
+package com.shekoo.iweather.ui.favorite
 
 import Daily
 import Hourly
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.shekoo.iweather.R
 import com.shekoo.iweather.databinding.FragmentHomeBinding
 import com.shekoo.iweather.model.Favorite
-import com.shekoo.iweather.repo.FavoriteRepo
-import com.shekoo.iweather.ui.*
+import com.shekoo.iweather.ui.FILE_NAME
+import com.shekoo.iweather.ui.LATITUDE
+import com.shekoo.iweather.ui.LONGITUDE
+import com.shekoo.iweather.ui.TAG
+import com.shekoo.iweather.ui.home.DailyAdapter
+import com.shekoo.iweather.ui.home.HomeViewModel
+import com.shekoo.iweather.ui.home.HourlyAdapter
 import java.io.IOException
 import java.util.*
 
-class HomeFragment() : Fragment() {
+
+class ShowFavoriteFragment(val favorite: Favorite) : Fragment() {
+
 
     private var binding: FragmentHomeBinding? = null
     private lateinit var homeViewModel: HomeViewModel
@@ -45,22 +52,19 @@ class HomeFragment() : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding?.root!!
-
-
 
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
+        homeViewModel.getWeather(favorite.favourite_latitude,favorite.favourite_longitude,"en","metric")
         observeViewModel()
     }
     private fun observeViewModel() {
-        homeViewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
+        homeViewModel.weatherLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             binding?.tempTv?.text= it.current.temp.toInt().toString()
             binding?.descriptionTv?.text = it.current.weather.get(0).description
             context?.let { context ->
@@ -105,20 +109,9 @@ class HomeFragment() : Fragment() {
         })
     }
 
-    private fun initViews() {
-        val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
-        val lat = sharedPreferences.getString(LATITUDE, "60.7392213" )?.toDouble()
-        val lon = sharedPreferences.getString(LONGITUDE,"8.3567771")?.toDouble()
-        val language = sharedPreferences.getString(LANGUAGE,"eg").toString()
-        homeViewModel.getWeather(lat!!,lon!!,language,"metric")
-        Log.i(TAG, "initViews: " + lat)
-        Log.i(TAG, "initViews: "+lon)
-
-        //homeViewModel.getWeather(30.4646308,30.9349903,"metric")
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
+
 }

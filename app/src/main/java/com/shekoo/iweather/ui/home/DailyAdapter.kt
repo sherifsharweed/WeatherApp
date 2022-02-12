@@ -38,7 +38,7 @@ class DailyAdapter (private val dailyTemp : List<Daily> , private val context : 
 
     inner class ViewHolder(val item : View) : RecyclerView.ViewHolder(item) {
         val daily_date_tv : TextView
-            get() = item.findViewById(R.id.daily_date_tv)
+            get() = item.findViewById(R.id.favortie_name_tv)
 
         val daily_description_tv : TextView
             get() = item.findViewById(R.id.daily_description_tv)

@@ -31,7 +31,7 @@
             android:value="AIzaSyC2gV0TN8rV_XCJjzx2gfpO71_SXCud_2g" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".ui.favorite.MapsActivity"
             android:exported="false"
             android:theme="@style/Theme.IWeather.NoActionBar"
             android:label="@string/title_activity_maps" />

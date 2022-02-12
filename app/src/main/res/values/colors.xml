@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="floating">#F5F5F5</color>
     <color name="textColor">#406882</color>
-    <color name="radioButton">#F5F5F5</color>
+    <color name="radioButton">#C8C6C6</color>
 </resources>

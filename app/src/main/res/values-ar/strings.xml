@@ -11,4 +11,12 @@
     <string name="location_setting">الموقع</string>
     <string name="gps_location">موقعي الحالي</string>
     <string name="map_location">الخريطة</string>
+    <string name="windspeed_setting">سرعة الرياح</string>
+    <string name="m_sec_windspeed">متر / الثانية</string>
+    <string name="mile_hour_windspeed">ميل / ساعة</string>
+    <string name="temperature_setting">درجة الحرارة</string>
+    <string name="celsius_temperature">سيليزيس</string>
+    <string name="kelvin_temperature">كيلفن</string>
+    <string name="fahrenheit_temperature">فيهرنهايت</string>
+    <string name="delete">حذف</string>
 </resources>

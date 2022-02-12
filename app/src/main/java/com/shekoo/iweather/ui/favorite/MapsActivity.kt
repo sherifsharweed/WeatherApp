@@ -1,13 +1,12 @@
-package com.shekoo.iweather
+package com.shekoo.iweather.ui.favorite
 
 import android.app.AlertDialog
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.coroutineScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -15,17 +14,21 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.shekoo.iweather.R
+import com.shekoo.iweather.data.local.WeatherDataBase
 import com.shekoo.iweather.databinding.ActivityMapsBinding
+import com.shekoo.iweather.model.Favorite
+import com.shekoo.iweather.repo.FavoriteRepo
 import com.shekoo.iweather.ui.TAG
+import kotlinx.coroutines.launch
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback
     ,GoogleMap.OnInfoWindowClickListener {
 
     private lateinit var myMap: GoogleMap
-
+    lateinit var repo : FavoriteRepo
     private lateinit var binding: ActivityMapsBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,10 +88,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback
         alertdialog.setPositiveButton("Save") { dialogInterface, i ->
             Toast.makeText(this, "Saved.", Toast.LENGTH_SHORT).show()
             Log.i(TAG, "showDialog: " + latitude+","+longitude)
+            addFavourite(latitude,longitude)
             finish()
+
         }
         alertdialog.create()
         alertdialog.show()
     }
+
+    fun addFavourite(latitude : Double , longitude : Double) {
+        lifecycle.coroutineScope.launch {
+            repo = FavoriteRepo(WeatherDataBase.getInstance(applicationContext).getWeatherDao())
+            repo.insertFavoriteItem(Favorite(latitude,longitude))
+        }
+    }
+
+
 
 }
