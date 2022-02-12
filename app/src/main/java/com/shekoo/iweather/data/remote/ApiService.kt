@@ -10,6 +10,7 @@ interface ApiService {
 
     fun getWeather(@Query("lat") lat: Double , @Query("lon") long: Double,
                    @Query("exclude") exclude : String,
+                   @Query("lang") language : String,
                    @Query("units") units : String ,
                    @Query("appid") appid : String): Call<WeatherResponse>
 

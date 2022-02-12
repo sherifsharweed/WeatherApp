@@ -160,7 +160,146 @@
             android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="2" />
+            android:weightSum="2" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/windspeed_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="2.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:text="@string/windspeed_setting"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/windspeed_radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="2.5dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/roundedcolor3"
+                    android:weightSum="2">
+
+                    <RadioButton
+                        android:id="@+id/metric_radiobutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/white"
+                        android:checked="true"
+                        android:fontFamily="@font/amaranth"
+                        android:gravity="center_vertical"
+                        android:text="@string/m_sec_windspeed"
+                        android:textColor="@color/radioButton"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/mile_radiobutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/white"
+                        android:fontFamily="@font/amaranth"
+                        android:gravity="center_vertical"
+                        android:text="@string/mile_hour_windspeed"
+                        android:textColor="@color/radioButton"
+                        android:textSize="16sp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/tempreture_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="2.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:text="@string/temperature_setting"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/tempreture_radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="2.5dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/roundedcolor3"
+                    android:weightSum="3">
+
+                    <RadioButton
+                        android:id="@+id/celsius_radiobutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/white"
+                        android:checked="true"
+                        android:fontFamily="@font/amaranth"
+                        android:gravity="center_vertical"
+                        android:text="@string/celsius_temperature"
+                        android:textColor="@color/radioButton"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/kelfin_radiobutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/white"
+                        android:fontFamily="@font/amaranth"
+                        android:gravity="center_vertical"
+                        android:text="@string/kelvin_temperature"
+                        android:textColor="@color/radioButton"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/fehrnhit_radiobutton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/white"
+                        android:fontFamily="@font/amaranth"
+                        android:gravity="center_vertical"
+                        android:text="@string/fahrenheit_temperature"
+                        android:textColor="@color/radioButton"
+                        android:textSize="16sp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,14 @@
 package com.shekoo.iweather.repo
 
 import WeatherResponse
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.shekoo.iweather.data.local.WeatherDataBase
 import com.shekoo.iweather.data.remote.API_KEY
 import com.shekoo.iweather.data.remote.EXCLUDE
 import com.shekoo.iweather.data.remote.RetrofitClient
+import com.shekoo.iweather.model.Favorite
 import retrofit2.Call
 import retrofit2.Response
 
@@ -13,8 +16,9 @@ class WeatherRepo {
     private val TAG = "main"
     val weatherLiveData = MutableLiveData<WeatherResponse>()
 
-    fun getWeather( lat : Double ,lon :Double , units : String ){
-        RetrofitClient.getApiService().getWeather(lat, lon, EXCLUDE , units , API_KEY).enqueue(object : retrofit2.Callback<WeatherResponse> {
+
+    fun getWeather( lat : Double ,lon :Double ,language : String , units : String ){
+        RetrofitClient.getApiService().getWeather(lat, lon, EXCLUDE ,language, units , API_KEY).enqueue(object : retrofit2.Callback<WeatherResponse> {
             override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                 if(response.isSuccessful){
                     response.body()?.let {

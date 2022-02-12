@@ -14,8 +14,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="40dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
             android:weightSum="2"
@@ -42,7 +44,7 @@
                     android:background="@drawable/rounded"
                     android:fontFamily="@font/amaranth"
                     android:gravity="center"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     tools:text="TextView" />
 
                 <TextView
@@ -55,7 +57,7 @@
                     android:background="@drawable/rounded"
                     android:fontFamily="@font/amaranth"
                     android:gravity="center"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     tools:text="TextView" />
 
                 <TextView
@@ -69,7 +71,7 @@
                     android:background="@drawable/rounded"
                     android:fontFamily="@font/amaranth"
                     android:gravity="center"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     tools:text="TextView" />
             </LinearLayout>
 
@@ -91,7 +93,7 @@
                     android:background="@drawable/rounded"
                     android:fontFamily="@font/amaranth"
                     android:gravity="center"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     tools:text="TextView" />
 
                 <TextView
@@ -104,7 +106,7 @@
                     android:background="@drawable/rounded"
                     android:fontFamily="@font/amaranth"
                     android:gravity="center"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     tools:text="TextView" />
 
                 <TextView
@@ -118,7 +120,7 @@
                     android:background="@drawable/rounded"
                     android:fontFamily="@font/amaranth"
                     android:gravity="center"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     tools:text="TextView" />
             </LinearLayout>
         </LinearLayout>
