@@ -2,6 +2,7 @@ package com.shekoo.iweather.ui.setting
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.shekoo.iweather.databinding.FragmentSettingBinding
 import com.shekoo.iweather.ui.*
 import java.util.*
+
 
 class SettingFragment : Fragment() {
 
@@ -77,6 +79,9 @@ class SettingFragment : Fragment() {
                     val editor = sharedPreferences.edit()
                     editor.putString(LANGUAGE,"en")
                     editor.apply()
+                    activity!!.getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR)
+                    setLocal(activity!! , "en")
+
                 }
             }
         })
@@ -165,5 +170,9 @@ class SettingFragment : Fragment() {
         val config = resources.configuration
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
+        activity.getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL)
+        val refresh = Intent(activity.applicationContext, MainActivity::class.java)
+        startActivity(refresh)
+        activity.finish()
     }
 }

@@ -61,7 +61,7 @@ class HomeFragment() : Fragment() {
     }
     private fun observeViewModel() {
         homeViewModel.weatherLiveData.observe(viewLifecycleOwner, Observer {
-            binding?.tempTv?.text= it.current.temp.toInt().toString()
+            binding?.tempTv?.text= setTemp(it.current.temp.toInt())
             binding?.descriptionTv?.text = it.current.weather.get(0).description
             context?.let { context ->
                 var link ="http://openweathermap.org/img/wn/"+ it.current?.weather.get(0).icon+"@2x.png"
@@ -78,12 +78,11 @@ class HomeFragment() : Fragment() {
             }
             binding?.cityTv?.text = city +",\n " + country
 
-            binding?.humidityTv?.text = "Humidity \n"+ it.current.humidity.toString()
-            binding?.pressureTv?.text = "Pressure \n" +it.current.pressure.toString()
-            binding?.cloudsTv?.text =" Clouds \n " +it.current.clouds.toString()
-            binding?.windspeedTv?.text = "WindSpeed\n"+ it.current.wind_speed.toString()
-            binding?.visibilityTv?.text ="Visibility\n"+ it.current.visibility.toString()
-            binding?.sunsetSunriseTv?.text=it.current.sunrise.toString()
+            binding?.humidityTv?.text =  it.current.humidity.toString()
+            binding?.pressureTv?.text = it.current.pressure.toString()
+            binding?.cloudsTv?.text =it.current.clouds.toString()
+            binding?.windspeedTv?.text = setWindSpeed(it.current.wind_speed)
+
 
             ////hourly recycler
             val layoutManagerForHourly = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
@@ -120,5 +119,26 @@ class HomeFragment() : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    fun setTemp(temp : Int): String{
+        val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
+        var tempDegree = sharedPreferences.getString(TEMPDEGREE,"celsius").toString()
+        if(tempDegree=="celsius") {
+            return (temp.toString() + "°C")
+        }else if (tempDegree=="fehrnhit"){
+            return ((temp*1.8+32).toInt().toString()+"°F")
+        }else
+            return ((temp+273).toString()+"°K")
+    }
+
+    fun setWindSpeed(wind : Double) : String{
+        val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
+        var tempDegree = sharedPreferences.getString(WINDSPEED,"metric").toString()
+        if(tempDegree == "metric"){
+            return (wind.toInt().toString())
+        }else
+            binding?.unitOfSpeed?.text = "mile/h"
+            return ((wind*2.236).toInt().toString())
     }
 }

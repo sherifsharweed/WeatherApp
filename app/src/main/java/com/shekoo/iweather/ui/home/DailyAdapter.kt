@@ -2,6 +2,7 @@ package com.shekoo.iweather.ui.home
 
 import Daily
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shekoo.iweather.R
+import com.shekoo.iweather.ui.FILE_NAME
+import com.shekoo.iweather.ui.TEMPDEGREE
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,7 +23,7 @@ class DailyAdapter (private val dailyTemp : List<Daily> , private val context : 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.daily_averageTemp_tv.text= dailyTemp.get(position).temp.max.toInt().toString()+"/"+dailyTemp.get(position).temp.min.toInt().toString()
+        holder.daily_averageTemp_tv.text= setTemp(dailyTemp.get(position).temp.max.toInt(),dailyTemp.get(position).temp.min.toInt())
         holder.daily_description_tv.text=dailyTemp.get(position).weather.get(0).description
         context?.let { context ->
             var link ="http://openweathermap.org/img/wn/"+ dailyTemp.get(position).weather.get(0).icon+"@2x.png"
@@ -48,6 +51,17 @@ class DailyAdapter (private val dailyTemp : List<Daily> , private val context : 
 
         val daily_icon: ImageView
             get() = item.findViewById(R.id.daily_icon)
+    }
+
+    fun setTemp(temp : Int , temp2:Int): String{
+        val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
+        var tempDegree = sharedPreferences.getString(TEMPDEGREE,"celsius").toString()
+        if(tempDegree=="celsius") {
+            return (temp.toString()+"/"+temp2.toString() + "°C")
+        }else if (tempDegree=="fehrnhit"){
+            return ((temp*1.8+32).toInt().toString()+"/"+(temp2*1.8+32).toInt().toString()+"°F")
+        }else
+            return ((temp+273).toString()+"/"+(temp2+273).toString()+"°K")
     }
 
 }

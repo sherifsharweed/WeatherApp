@@ -27,5 +27,14 @@
     <string name="fahrenheit_temperature">Fahrenheit</string>
     <string name="delete">Delete</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="humidity">Humidity</string>
+    <string name="visibility">Visibility</string>
+    <string name="clouds">Clouds</string>
+    <string name="windspeed">Wind Speed</string>
+    <string name="pressure">Pressure</string>
+    <string name="metric">m/sec</string>
+    <string name="mile">mile/h</string>
+    <string name="hPa" translatable="false">hPa</string>
+    <string name="persent" translatable="false">%</string>
 </resources>
