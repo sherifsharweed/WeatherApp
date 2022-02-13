@@ -15,12 +15,15 @@ class MyLocationListener(var context : Context) : LocationListener {
     override fun onLocationChanged(p0: Location) {
         wayLatitude = p0.latitude
         wayLongitude = p0.longitude
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+        var location : String? = sharedPreferences.getString(LOCATION,"gps")
+        if(location =="gps"){
         val sharedPreferences: SharedPreferences = context.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString(LATITUDE, wayLatitude.toString())
         editor.putString(LONGITUDE , wayLongitude.toString())
         editor.apply()
-        //Toast.makeText(context,""+wayLatitude + " "+wayLongitude ,Toast.LENGTH_LONG).show()
+    }
     }
 
     override fun onProviderEnabled(provider: String) {}

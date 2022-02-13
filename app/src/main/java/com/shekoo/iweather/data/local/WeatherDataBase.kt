@@ -5,8 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.shekoo.iweather.model.Favorite
+import com.shekoo.iweather.model.MyAlert
 
-@Database(entities = [Favorite::class], version = 1)
+@Database(entities = [Favorite::class,MyAlert::class], version = 2)
 
 abstract class WeatherDataBase : RoomDatabase() {
 

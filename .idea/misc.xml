@@ -27,6 +27,7 @@
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/side_nav_bar.xml" value="0.186" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/weatherstate.xml" value="0.2265" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout-v31/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_add_alert.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_main.xml" value="0.1657754010695187" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_main2.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_maps.xml" value="0.25416666666666665" />
@@ -47,6 +48,8 @@
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/menu/delete.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/menu/delete_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/menu/main2.xml" value="0.25416666666666665" />
+        <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1975" />
+        <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1975" />
       </map>
     </option>
   </component>

@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        checkLocale()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -52,24 +53,30 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        //////////get location permissions
+       //////////get location permissions
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         myLocationListener = MyLocationListener(this)
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this, PERMISSIONS, LOCATION_CODE)
-            return
+/*
+        val sharedPreferences: SharedPreferences = applicationContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+        var location : String? = sharedPreferences.getString(LOCATION,"gps")
+        if(location =="gps"){
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(this, PERMISSIONS, LOCATION_CODE)
+                return
+            }else{
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F,myLocationListener)
+            }
         }else{
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F,myLocationListener)
-        }
+                locationManager.removeUpdates(myLocationListener)
+            }
         //////////////
-
+       // checkLocale()
+*/
     }
 
-    override fun onResume() {
-        super.onResume()
+    fun checkLocale() {
          val sharedPreferences: SharedPreferences = applicationContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         if(sharedPreferences.getString(LANGUAGE,"en").toString()=="ar") {
             val locale = Locale("ar")
@@ -88,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             config.setLocale(locale)
             resources.updateConfiguration(config, resources.displayMetrics)
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR)
+
         }
     }
 
@@ -110,9 +118,12 @@ class MainActivity : AppCompatActivity() {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                 {
-                    return
+                    finish()
                 }else{
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F,myLocationListener)
+                    intent = Intent(this,MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
             }
         }

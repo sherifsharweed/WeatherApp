@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import androidx.room.Dao
 import com.shekoo.iweather.model.Favorite
+import com.shekoo.iweather.model.MyAlert
 
 @Dao
 interface Dao {
 
 
+
+    //favorites
     @Insert()
    suspend fun insertFavoriteItem(favorite:Favorite)
 
@@ -18,6 +21,13 @@ interface Dao {
 
     @Delete
     suspend fun deleteFavoriteItem(favorite: Favorite)
+
+    //alarms
+    @Insert()
+    suspend fun insertAlarmItem(alert : MyAlert)
+
+    @Delete
+    suspend fun deleteAlarmItem(alert: MyAlert)
 
 
 }

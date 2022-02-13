@@ -26,4 +26,10 @@
     <string name="pressure">الضغط</string>
     <string name="metric">متر/ث</string>
     <string name="mile">ميل/س</string>
+    <string name="from">من</string>
+    <string name="to">الى</string>
+    <string name="notification">الاشعارات</string>
+    <string name="alarm">التنبيه</string>
+    <string name="save">حفظ</string>
+    <string name="hPa">هيكتوباسكال</string>
 </resources>
