@@ -19,4 +19,11 @@
     <string name="kelvin_temperature">كيلفن</string>
     <string name="fahrenheit_temperature">فيهرنهايت</string>
     <string name="delete">حذف</string>
+    <string name="humidity">الرطوبة</string>
+    <string name="visibility">الرؤية</string>
+    <string name="clouds">السحب</string>
+    <string name="windspeed">سرعة الرياح</string>
+    <string name="pressure">الضغط</string>
+    <string name="metric">متر/ث</string>
+    <string name="mile">ميل/س</string>
 </resources>

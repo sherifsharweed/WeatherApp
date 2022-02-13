@@ -86,8 +86,7 @@ class ShowFavoriteFragment(val favorite: Favorite) : Fragment() {
             binding?.pressureTv?.text = "Pressure \n" +it.current.pressure.toString()
             binding?.cloudsTv?.text =" Clouds \n " +it.current.clouds.toString()
             binding?.windspeedTv?.text = "WindSpeed\n"+ it.current.wind_speed.toString()
-            binding?.visibilityTv?.text ="Visibility\n"+ it.current.visibility.toString()
-            binding?.sunsetSunriseTv?.text=it.current.sunrise.toString()
+
 
             ////hourly recycler
             val layoutManagerForHourly = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)

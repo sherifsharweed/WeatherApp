@@ -2,6 +2,7 @@ package com.shekoo.iweather.ui
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.LocationManager
@@ -21,6 +22,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.shekoo.iweather.R
 import com.shekoo.iweather.databinding.ActivityMainBinding
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,10 +65,30 @@ class MainActivity : AppCompatActivity() {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F,myLocationListener)
         }
         //////////////
-       /* val sharedPreferences: SharedPreferences = applicationContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+         val sharedPreferences: SharedPreferences = applicationContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         if(sharedPreferences.getString(LANGUAGE,"en").toString()=="ar") {
-            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-        }*/
+            val locale = Locale("ar")
+            Locale.setDefault(locale)
+            val resources = this.resources
+            val config = resources.configuration
+            config.setLocale(locale)
+            resources.updateConfiguration(config, resources.displayMetrics)
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL)
+        }
+        else{
+            val locale = Locale("en")
+            Locale.setDefault(locale)
+            val resources = this.resources
+            val config = resources.configuration
+            config.setLocale(locale)
+            resources.updateConfiguration(config, resources.displayMetrics)
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR)
+        }
     }
 
 
