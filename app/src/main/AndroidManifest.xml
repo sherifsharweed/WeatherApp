@@ -31,10 +31,19 @@
             android:value="AIzaSyC2gV0TN8rV_XCJjzx2gfpO71_SXCud_2g" />
 
         <activity
-            android:name=".ui.favorite.MapsActivity"
+            android:name=".ui.setting.MapForLocationActivity"
             android:exported="false"
             android:theme="@style/Theme.IWeather.NoActionBar"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_map_for_location" />
+        <activity
+            android:name=".ui.alert.AddAlertActivity"
+            android:exported="false"
+            android:theme="@style/Theme.IWeather.NoActionBar" />
+        <activity
+            android:name=".ui.favorite.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps"
+            android:theme="@style/Theme.IWeather.NoActionBar" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

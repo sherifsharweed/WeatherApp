@@ -105,8 +105,7 @@ class FavoriteAdapter (private val favouriteList : List<Favorite>, private val c
     fun openFavortie(favorite: Favorite){
         var app : AppCompatActivity = context as AppCompatActivity
         var home = ShowFavoriteFragment(favorite)
-        app.supportFragmentManager.beginTransaction().add(R.id.container,home).addToBackStack(null).commit()
-
+        app.supportFragmentManager.beginTransaction().add(R.id.container,home).addToBackStack("null").commit()
     }
 
 

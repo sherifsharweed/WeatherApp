@@ -1,14 +1,19 @@
 package com.shekoo.iweather.ui.setting
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.shekoo.iweather.databinding.FragmentSettingBinding
@@ -20,6 +25,9 @@ class SettingFragment : Fragment() {
 
     private var _binding: FragmentSettingBinding? = null
 
+    private lateinit var locationManager : LocationManager
+    private lateinit var myLocationListener : MyLocationListener
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,6 +38,10 @@ class SettingFragment : Fragment() {
         val settingViewModel = ViewModelProvider(this).get(SettingViewModel::class.java)
 
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
+        locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        myLocationListener = MyLocationListener(requireContext())
+
+
         val root: View = binding.root
 
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
@@ -79,7 +91,6 @@ class SettingFragment : Fragment() {
                     val editor = sharedPreferences.edit()
                     editor.putString(LANGUAGE,"en")
                     editor.apply()
-                    activity!!.getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR)
                     setLocal(activity!! , "en")
 
                 }
@@ -142,6 +153,7 @@ class SettingFragment : Fragment() {
                     val editor = sharedPreferences.edit()
                     editor.putString(LOCATION,"gps")
                     editor.apply()
+                    //checkcurrentlocation(context!!)
                 }
             }
         })
@@ -152,6 +164,7 @@ class SettingFragment : Fragment() {
                     val editor = sharedPreferences.edit()
                     editor.putString(LOCATION,"map")
                     editor.apply()
+                    openMap()
                 }
             }
         })
@@ -170,9 +183,34 @@ class SettingFragment : Fragment() {
         val config = resources.configuration
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
-        activity.getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL)
+        /*when(langCode){
+            "ar" ->  activity.getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL)
+            "en" ->  activity.getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR)
+        }*/
         val refresh = Intent(activity.applicationContext, MainActivity::class.java)
         startActivity(refresh)
         activity.finish()
     }
+
+    fun openMap(){
+        locationManager.removeUpdates(myLocationListener)
+        var intent = Intent(this.context,MapForLocationActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun checkcurrentlocation(context: Context){
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(requireActivity(), PERMISSIONS, LOCATION_CODE)
+            return
+        }else{
+            val sharedPreferences: SharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+            var location : String? = sharedPreferences.getString(LOCATION,"gps")
+            if(location =="gps"){
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F,myLocationListener)
+            }
+        }
+    }
+
 }

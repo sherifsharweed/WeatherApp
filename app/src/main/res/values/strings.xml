@@ -35,6 +35,12 @@
     <string name="pressure">Pressure</string>
     <string name="metric">m/sec</string>
     <string name="mile">mile/h</string>
-    <string name="hPa" translatable="false">hPa</string>
+    <string name="hPa">hPa</string>
     <string name="persent" translatable="false">%</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="notification">Notification</string>
+    <string name="alarm">Alarm</string>
+    <string name="save">Save</string>
+    <string name="title_activity_map_for_location" translatable="false">MapForLocationActivity</string>
 </resources>

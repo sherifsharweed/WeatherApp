@@ -20,14 +20,12 @@ import com.bumptech.glide.Glide
 import com.shekoo.iweather.R
 import com.shekoo.iweather.databinding.FragmentHomeBinding
 import com.shekoo.iweather.model.Favorite
-import com.shekoo.iweather.ui.FILE_NAME
-import com.shekoo.iweather.ui.LATITUDE
-import com.shekoo.iweather.ui.LONGITUDE
-import com.shekoo.iweather.ui.TAG
+import com.shekoo.iweather.ui.*
 import com.shekoo.iweather.ui.home.DailyAdapter
 import com.shekoo.iweather.ui.home.HomeViewModel
 import com.shekoo.iweather.ui.home.HourlyAdapter
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -60,12 +58,21 @@ class ShowFavoriteFragment(val favorite: Favorite) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeViewModel.getWeather(favorite.favourite_latitude,favorite.favourite_longitude,"en","metric")
+        initviews()
         observeViewModel()
     }
+
+    private fun initviews() {
+        val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
+        val language = sharedPreferences.getString(LANGUAGE,"en").toString()
+        homeViewModel.getWeather(favorite.favourite_latitude,favorite.favourite_longitude,language,"metric")
+    }
+
     private fun observeViewModel() {
         homeViewModel.weatherLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            binding?.tempTv?.text= it.current.temp.toInt().toString()
+            binding?.tempTv?.text= setTemp(it.current.temp.toInt())
+            binding?.dateTv?.text = setDate (it.current.dt)
+            binding?.timeTv?.text = setTime(it.current.dt)
             binding?.descriptionTv?.text = it.current.weather.get(0).description
             context?.let { context ->
                 var link ="http://openweathermap.org/img/wn/"+ it.current?.weather.get(0).icon+"@2x.png"
@@ -82,10 +89,11 @@ class ShowFavoriteFragment(val favorite: Favorite) : Fragment() {
             }
             binding?.cityTv?.text = city +",\n " + country
 
-            binding?.humidityTv?.text = "Humidity \n"+ it.current.humidity.toString()
-            binding?.pressureTv?.text = "Pressure \n" +it.current.pressure.toString()
-            binding?.cloudsTv?.text =" Clouds \n " +it.current.clouds.toString()
-            binding?.windspeedTv?.text = "WindSpeed\n"+ it.current.wind_speed.toString()
+            binding?.humidityTv?.text =  it.current.humidity.toString()
+            binding?.pressureTv?.text = it.current.pressure.toString()
+            binding?.cloudsTv?.text =it.current.clouds.toString()
+            binding?.windspeedTv?.text = setWindSpeed(it.current.wind_speed)
+            binding?.unitOfWindSpeed?.text = editunit()
 
 
             ////hourly recycler
@@ -106,6 +114,56 @@ class ShowFavoriteFragment(val favorite: Favorite) : Fragment() {
             recyclerViewVertical.adapter = myDailyAdapter
             recyclerViewVertical.layoutManager = layoutManagerForDaily
         })
+    }
+
+    fun setTemp(temp : Int): String{
+        val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
+        var tempDegree = sharedPreferences.getString(TEMPDEGREE,"celsius").toString()
+        if(tempDegree=="celsius") {
+            return (temp.toString() + "°C")
+        }else if (tempDegree=="fehrnhit"){
+            return ((temp*1.8+32).toInt().toString()+"°F")
+        }else
+            return ((temp+273).toString()+"°K")
+    }
+
+    fun setWindSpeed(wind : Double) : String{
+        val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
+        var tempDegree = sharedPreferences.getString(WINDSPEED,"metric").toString()
+        if(tempDegree == "metric"){
+            return (wind.toInt().toString())
+        }else{
+            return ((wind*2.236).toInt().toString())
+    }}
+
+    fun editunit() : String {
+        val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
+        val tempDegree = sharedPreferences.getString(WINDSPEED,"metric").toString()
+        val language = sharedPreferences.getString(LANGUAGE,"en").toString()
+        Log.i(TAG, "editunit: "+tempDegree)
+        if(tempDegree == "mile"){
+            if(language=="en"){
+                return ("mile/hr")
+            }else
+                return("ميل/ساعة")
+        }else{
+            if(language =="en"){
+                return ("m/sec")
+            }else
+                return ("متر/ث")
+        }
+    }
+
+    fun setDate( date : Int) : String{
+        val netDate = Date(date.toLong() * 1000)
+        val sdf: SimpleDateFormat = SimpleDateFormat("EEE, MMM d")
+        return sdf.format(netDate)
+    }
+
+    fun setTime(time : Int) : String {
+        val netDate = Date(time.toLong() * 1000)
+        val sdf: SimpleDateFormat = SimpleDateFormat("h:mm a")
+        return sdf.format(netDate)
     }
 
     override fun onDestroyView() {
