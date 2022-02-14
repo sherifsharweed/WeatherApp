@@ -1,5 +1,6 @@
 package com.shekoo.iweather.data.local
 
+import android.service.autofill.LuhnChecksumValidator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
@@ -28,6 +29,9 @@ interface Dao {
 
     @Delete
     suspend fun deleteAlarmItem(alert: MyAlert)
+
+    @Query("SELECT * FROM alert_list")
+    fun getAllAlerts() : LiveData<List<MyAlert>>
 
 
 }
