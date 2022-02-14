@@ -3,23 +3,37 @@ package com.shekoo.iweather.ui.alert
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.shekoo.iweather.databinding.ActivityAddAlertBinding
+import com.shekoo.iweather.model.MyAlert
+import com.shekoo.iweather.ui.TAG
+
 import java.util.*
 
 class AddAlertActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAddAlertBinding
-     var tHour : Int =0
-     var tMinut : Int =0
+    private lateinit var alertViewModel: AlertViewModel
+    var fHour : Int =0
+    var fMinute : Int =0
+    var lHour : Int =0
+    var lMinute : Int =0
+    var fDay : Int =0
+    var fMonth : Int =0
+    var fYear : Int =0
+    var lDay : Int =0
+    var lMonth : Int =0
+    var lYear : Int =0
+
+
     val calendar = Calendar.getInstance()
 
 
@@ -29,54 +43,105 @@ class AddAlertActivity : AppCompatActivity() {
         binding = ActivityAddAlertBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val alertViewModelFactory = AlertViewModelFactory(applicationContext)
+        alertViewModel = ViewModelProvider(this,alertViewModelFactory).get(AlertViewModel::class.java)
+
         binding.selectFirstTime.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                setTime(binding.firstTime)
+                setFirstTime(binding.firstTime)
             }
         })
 
         binding.selectSecondTime.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                setTime(binding.secondTime)
+                setSecondTime(binding.secondTime)
             }
         })
 
         binding.selectFirstDate.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                setDate(binding.firstDate)
+                setFirstDate(binding.firstDate)
             }
         })
 
         binding.selectSecondDate.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                setDate(binding.secondDate)
+                setSecondDate(binding.secondDate)
+            }
+        })
+
+        binding.btnSave.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                val firstUNIX =getUnix(fYear,fMonth,fDay,fHour,fMinute)
+                Log.i(TAG, "onClick: "+firstUNIX)
+                val secondUNIX = getUnix(lYear,lMonth,lDay,lHour,lMinute)
+                Log.i(TAG, "onClick: "+secondUNIX)
+                alertViewModel.insertAlarmItem(MyAlert(firstUNIX,secondUNIX))
+                finish()
             }
         })
     }
 
-    fun setTime(tvTime: TextView) {
+    fun setFirstTime(tvTime: TextView) {
         val timePickerDialog = TimePickerDialog(this, object : TimePickerDialog.OnTimeSetListener{
             override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
-                 tHour = hour
-                 tMinut = minute
+                fHour = hour
+                fMinute = minute
                 val calendar2 = Calendar.getInstance()
-                calendar2.set(0, 0, 0, tHour, tMinut)
+                calendar2.set(0, 0, 0, fHour, fMinute)
                 tvTime.setText(DateFormat.format("hh:mm aa", calendar2))
             }
         },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false )
-        timePickerDialog.updateTime(tHour, tMinut)
+        timePickerDialog.updateTime(fHour, fMinute)
         timePickerDialog.show()
     }
 
-    fun setDate(tvDate: TextView) {
+    fun setSecondTime(tvTime: TextView) {
+        val timePickerDialog = TimePickerDialog(this, object : TimePickerDialog.OnTimeSetListener{
+            override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
+                lHour = hour
+                lMinute = minute
+                val calendar2 = Calendar.getInstance()
+                calendar2.set(0, 0, 0, lHour, lMinute)
+                tvTime.setText(DateFormat.format("hh:mm aa", calendar2))
+            }
+        },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false )
+        timePickerDialog.updateTime(lHour, lMinute)
+        timePickerDialog.show()
+    }
+
+    fun setFirstDate(tvDate: TextView) {
 
         val datePickerDialog = DatePickerDialog(this, object : OnDateSetListener{
                 override fun onDateSet(p0: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                    val month = month + 1
-                    val date: String = dayOfMonth.toString() + "/" + month + "/" + year
+                    fYear = year
+                    fMonth = month+1
+                    fDay = dayOfMonth
+                    val date: String = fDay.toString() + "/" + fMonth + "/" + fYear
                     tvDate.text = date
                 }
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
         datePickerDialog.show()
+    }
+
+    fun setSecondDate(tvDate: TextView) {
+
+        val datePickerDialog = DatePickerDialog(this, object : OnDateSetListener{
+            override fun onDateSet(p0: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+                lYear = year
+                lMonth = month+1
+                lDay = dayOfMonth
+                val date: String = lDay.toString() + "/" + lMonth + "/" + lYear
+                tvDate.text = date
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+        datePickerDialog.show()
+    }
+
+    fun getUnix(year : Int , month : Int , day : Int , hour : Int , minute : Int ): Long{
+
+        var cal = Calendar.getInstance()
+        cal.set(year,month-1,day,hour,minute,0)
+        return (cal.timeInMillis/1000L)
     }
 }
