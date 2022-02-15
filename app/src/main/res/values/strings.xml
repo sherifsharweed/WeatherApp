@@ -43,4 +43,5 @@
     <string name="alarm">Alarm</string>
     <string name="save">Save</string>
     <string name="title_activity_map_for_location" translatable="false">MapForLocationActivity</string>
+    <string name="ok">Ok</string>
 </resources>

@@ -14,7 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IWeather"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".ui.alert.NotificationActivity"
+            android:theme="@style/Theme.AppCompat.transparent"
+            android:exported="false" />
+        <activity
+            android:name=".ui.alert.DialogActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.transparent" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -33,8 +40,8 @@
         <activity
             android:name=".ui.setting.MapForLocationActivity"
             android:exported="false"
-            android:theme="@style/Theme.IWeather.NoActionBar"
-            android:label="@string/title_activity_map_for_location" />
+            android:label="@string/title_activity_map_for_location"
+            android:theme="@style/Theme.IWeather.NoActionBar" />
         <activity
             android:name=".ui.alert.AddAlertActivity"
             android:exported="false"

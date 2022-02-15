@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.shekoo.iweather.R
 import com.shekoo.iweather.data.local.WeatherDataBase
@@ -25,7 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AlertAdapter (private val alertList : List<MyAlert>, private val context : Context) :
+class AlertAdapter (private val alertList : List<MyAlert>, private val context : Context,private val onDeleteAlert :(MyAlert)-> Unit) :
     RecyclerView.Adapter<AlertAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -51,7 +52,7 @@ class AlertAdapter (private val alertList : List<MyAlert>, private val context :
                 }
                 alertdialog.setNegativeButton("Yes") { dialogInterface, i ->
                     Toast.makeText(context, "Deleted.", Toast.LENGTH_SHORT).show()
-                    deleteAlert(alertList.get(holder.adapterPosition))
+                    onDeleteAlert.invoke(alertList.get(holder.adapterPosition))
                 }
                 alertdialog.create()
                 alertdialog.show()
@@ -77,17 +78,6 @@ class AlertAdapter (private val alertList : List<MyAlert>, private val context :
 
 
     }
-
-    fun deleteAlert(alert: MyAlert) {
-         lateinit var repo: AlertRepo
-
-         GlobalScope.launch {
-             repo = AlertRepo(WeatherDataBase.getInstance(context).getWeatherDao())
-             repo.deleteAlarmItem(alert)
-
-         }
-     }
-
 
 
     fun returnTimeFormat(unix : Long) : String{

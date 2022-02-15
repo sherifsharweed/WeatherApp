@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.coroutineScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -23,11 +24,11 @@ import com.shekoo.iweather.ui.TAG
 import kotlinx.coroutines.launch
 
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback
-    ,GoogleMap.OnInfoWindowClickListener {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnInfoWindowClickListener {
 
     private lateinit var myMap: GoogleMap
     lateinit var repo : FavoriteRepo
+    private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var binding: ActivityMapsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val favoriteViewModelFactory = FavoriteViewModelFactory(applicationContext)
+        favoriteViewModel = ViewModelProvider(this,favoriteViewModelFactory).get(FavoriteViewModel::class.java)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -50,6 +54,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     override fun onMapReady(googleMap: GoogleMap) {
         myMap = googleMap
 
@@ -74,8 +79,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback
     }
 
     fun showDialog(p0: LatLng){
-        var latitude = p0.latitude
-        var longitude = p0.longitude
+        val latitude = p0.latitude
+        val longitude = p0.longitude
         val alertdialog = AlertDialog.Builder(this)
         alertdialog.setCancelable(false) // that make the dialog cant cancelled until u click inside the dialog itself
         alertdialog.setTitle("Save")
@@ -87,20 +92,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback
         alertdialog.setPositiveButton("Save") { dialogInterface, i ->
             Toast.makeText(this, "Saved.", Toast.LENGTH_SHORT).show()
             Log.i(TAG, "showDialog: " + latitude+","+longitude)
-            addFavourite(latitude,longitude)
+            favoriteViewModel.insertFavoriteItem(Favorite(latitude,longitude))
             finish()
-
         }
         alertdialog.create()
         alertdialog.show()
     }
 
-    fun addFavourite(latitude : Double , longitude : Double) {
-        lifecycle.coroutineScope.launch {
-            repo = FavoriteRepo(WeatherDataBase.getInstance(applicationContext).getWeatherDao())
-            repo.insertFavoriteItem(Favorite(latitude,longitude))
-        }
-    }
 
 
 

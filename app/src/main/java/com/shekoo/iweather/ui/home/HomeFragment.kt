@@ -183,7 +183,6 @@ class HomeFragment: Fragment() {
         val sharedPreferences: SharedPreferences = context?.getSharedPreferences(FILE_NAME,Context.MODE_PRIVATE)!!
         val tempDegree = sharedPreferences.getString(WINDSPEED,"metric").toString()
         val language = sharedPreferences.getString(LANGUAGE,"en").toString()
-        Log.i(TAG, "editunit: "+tempDegree)
         if(tempDegree == "mile"){
             if(language=="en"){
                 return ("mile/hr")
@@ -197,7 +196,7 @@ class HomeFragment: Fragment() {
         }
     }
 
-    fun setDate( date : Int) : String{
+    fun setDate(date : Int) : String{
         val netDate = Date(date.toLong() * 1000)
         val sdf: SimpleDateFormat = SimpleDateFormat("EEE, MMM d")
         return sdf.format(netDate)
@@ -219,7 +218,7 @@ class HomeFragment: Fragment() {
                     requireActivity().finish()
                 }else{
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F,myLocationListener)
-                    var intent = Intent(requireContext(),MainActivity::class.java)
+                    val intent = Intent(requireContext(),MainActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
                 }

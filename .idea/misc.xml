@@ -21,6 +21,7 @@
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.2" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.2" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/ic_settings.xml" value="0.2" />
+        <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/notification.xml" value="0.1975" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/rounded.xml" value="0.2" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/roundedcolor2.xml" value="0.166" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/roundedcolor3.xml" value="0.166" />
@@ -28,9 +29,11 @@
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/drawable/weatherstate.xml" value="0.2265" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout-v31/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_add_alert.xml" value="0.25416666666666665" />
+        <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_main.xml" value="0.1657754010695187" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_main2.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_maps.xml" value="0.25416666666666665" />
+        <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/activity_notification.xml" value="0.24010416666666667" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/alert_item.xml" value="0.25416666666666665" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/app_bar_main2.xml" value="0.2" />
         <entry key="..\:/ITI/Kotlin/Project/app/src/main/res/layout/content_main2.xml" value="0.2" />

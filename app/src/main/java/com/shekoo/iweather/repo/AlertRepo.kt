@@ -17,4 +17,8 @@ class AlertRepo(private var dao : Dao) {
     fun getAllAlerts(): LiveData<List<MyAlert>>{
         return dao.getAllAlerts()
     }
+
+    suspend fun deleteSpecificAlarm (first : Long){
+        dao.deleteSpecificAlarm(first)
+    }
 }

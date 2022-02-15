@@ -60,7 +60,7 @@ class FavoriteFragment : Fragment() {
     private fun observeViewModel() {
         favoriteViewModel.getAllFavorites().observe(viewLifecycleOwner, Observer {
             favoriteList = it
-            favoriteAdapter = FavoriteAdapter(favoriteList, requireContext())
+            favoriteAdapter = FavoriteAdapter(favoriteList, requireContext(),favoriteViewModel)
             recyclerView.adapter = favoriteAdapter
 
             Log.i(TAG, "observeViewModel: "+it.size)
