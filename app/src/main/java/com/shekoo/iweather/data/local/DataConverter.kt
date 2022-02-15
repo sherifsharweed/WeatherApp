@@ -6,6 +6,7 @@ import Weather
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.shekoo.iweather.model.Alerts
 import java.lang.reflect.Type
 
 
@@ -69,5 +70,25 @@ object DataConverter {
         val gson = Gson()
         val type: Type = object : TypeToken<List<Weather>>() {}.type
         return gson.fromJson(weatherString, type)
+    }
+
+    @TypeConverter
+    fun alertListToString(alertList: List<Alerts>?): String? {
+        if (alertList == null) {
+            return null
+        }
+        val gson = Gson()
+        val type: Type = object : TypeToken<List<Alerts>>(){}.type
+        return gson.toJson(alertList, type)
+    }
+
+    @TypeConverter
+    fun alertStringToList(alertString: String?): List<Alerts>? {
+        if (alertString == null) {
+            return emptyList()
+        }
+        val gson = Gson()
+        val type: Type = object : TypeToken<List<Alerts>>() {}.type
+        return gson.fromJson(alertString, type)
     }
 }

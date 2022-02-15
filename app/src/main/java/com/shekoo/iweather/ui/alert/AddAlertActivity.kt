@@ -10,13 +10,18 @@ import android.view.View
 import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import com.shekoo.iweather.databinding.ActivityAddAlertBinding
 import com.shekoo.iweather.model.MyAlert
 import com.shekoo.iweather.ui.TAG
-
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class AddAlertActivity : AppCompatActivity() {
 
@@ -37,11 +42,12 @@ class AddAlertActivity : AppCompatActivity() {
     val calendar = Calendar.getInstance()
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddAlertBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         val alertViewModelFactory = AlertViewModelFactory(applicationContext)
         alertViewModel = ViewModelProvider(this,alertViewModelFactory).get(AlertViewModel::class.java)
@@ -49,6 +55,8 @@ class AddAlertActivity : AppCompatActivity() {
         binding.selectFirstTime.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
                 setFirstTime(binding.firstTime)
+
+
             }
         })
 
@@ -72,15 +80,28 @@ class AddAlertActivity : AppCompatActivity() {
 
         binding.btnSave.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                val firstUNIX =getUnix(fYear,fMonth,fDay,fHour,fMinute)
-                Log.i(TAG, "onClick: "+firstUNIX)
-                val secondUNIX = getUnix(lYear,lMonth,lDay,lHour,lMinute)
-                Log.i(TAG, "onClick: "+secondUNIX)
-                alertViewModel.insertAlarmItem(MyAlert(firstUNIX,secondUNIX))
-                finish()
+                val firstUNIX = getUnix(fYear, fMonth, fDay, fHour, fMinute)
+                val secondUNIX = getUnix(lYear, lMonth, lDay, lHour, lMinute)
+
+                val calendarnow = Calendar.getInstance()
+                val calendarMillies = calendarnow.timeInMillis / 1000L
+
+                if (firstUNIX < calendarMillies || secondUNIX < calendarMillies) {
+                    Toast.makeText(applicationContext, "Error in selecting date", Toast.LENGTH_SHORT).show()
+                } else {
+                    alertViewModel.insertAlarmItem(MyAlert(firstUNIX, secondUNIX))
+
+                    if (binding.notificationButton.isChecked) {
+                        setWorkNotification(firstUNIX)
+                    } else {
+                        setWorkAlarm(firstUNIX)
+                    }
+                    finish()
+                }
             }
         })
     }
+
 
     fun setFirstTime(tvTime: TextView) {
         val timePickerDialog = TimePickerDialog(this, object : TimePickerDialog.OnTimeSetListener{
@@ -140,8 +161,36 @@ class AddAlertActivity : AppCompatActivity() {
 
     fun getUnix(year : Int , month : Int , day : Int , hour : Int , minute : Int ): Long{
 
-        var cal = Calendar.getInstance()
+        val cal = Calendar.getInstance()
         cal.set(year,month-1,day,hour,minute,0)
         return (cal.timeInMillis/1000L)
+    }
+
+    private fun setWorkAlarm( UNIX: Long) {
+        val dataInput = Data.Builder().putLong("KEY", UNIX).build()
+        Log.i(TAG, "setWorkAlarm: "+dataInput)
+        val workManager : WorkManager = WorkManager.getInstance()
+        val calendarNow = Calendar.getInstance()
+        val nowMillis = calendarNow.timeInMillis
+        val diff = UNIX*1000L - nowMillis
+        Log.i(TAG, "setWorkAlarm: $diff")
+        val workRequest : WorkRequest = OneTimeWorkRequest.Builder(WorkManagerForAlarm::class.java)
+            .setInitialDelay(diff, TimeUnit.MILLISECONDS)
+            .setInputData(dataInput)
+            .build()
+        workManager.enqueue(workRequest)
+    }
+
+    private fun setWorkNotification( UNIX: Long) {
+        val dataInput = Data.Builder().putLong("KEY", UNIX).build()
+        val workManager : WorkManager = WorkManager.getInstance()
+        val calendarNow = Calendar.getInstance()
+        val nowMillis = calendarNow.timeInMillis
+        val diff = UNIX*1000L - nowMillis
+        Log.i(TAG, "setWorkAlarm: $diff")
+        val workRequest : WorkRequest = OneTimeWorkRequest.Builder(WorkManagerForNotification::class.java)
+            .setInputData(dataInput)
+            .setInitialDelay(diff, TimeUnit.MILLISECONDS).build()
+        workManager.enqueue(workRequest)
     }
 }

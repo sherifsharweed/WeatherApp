@@ -1,8 +1,6 @@
 package com.shekoo.iweather.repo
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.shekoo.iweather.data.local.Dao
 import com.shekoo.iweather.model.Favorite
 

@@ -180,7 +180,7 @@
                 android:weightSum="2">
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/notificationButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -195,7 +195,7 @@
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/AlarmButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"

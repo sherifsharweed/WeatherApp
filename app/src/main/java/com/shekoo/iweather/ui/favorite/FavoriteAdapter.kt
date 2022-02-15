@@ -22,7 +22,7 @@ import java.io.IOException
 import java.util.*
 
 
-class FavoriteAdapter (private val favouriteList : List<Favorite>, private val context : Context) :
+class FavoriteAdapter (private val favouriteList : List<Favorite>, private val context : Context, private val favoriteViewModel: FavoriteViewModel) :
     RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,9 +31,9 @@ class FavoriteAdapter (private val favouriteList : List<Favorite>, private val c
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.favorite_name_tv.text = returnLocation(favouriteList.get(position))
+        holder.favoriteName.text = returnLocation(favouriteList.get(position))
 
-        holder.favorite_delete.setOnClickListener(object : View.OnClickListener{
+        holder.favoriteDelete.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
                 val alertdialog = AlertDialog.Builder(context)
                 alertdialog.setCancelable(false) // that make the dialog cant cancelled until u click inside the dialog itself
@@ -45,16 +45,16 @@ class FavoriteAdapter (private val favouriteList : List<Favorite>, private val c
                 }
                 alertdialog.setNegativeButton("Yes") { dialogInterface, i ->
                     Toast.makeText(context, "Deleted.", Toast.LENGTH_SHORT).show()
-                    deleteFavourite(favouriteList.get(holder.adapterPosition))
+                    favoriteViewModel.deleteFavoriteItem(favouriteList[holder.adapterPosition])
                 }
                 alertdialog.create()
                 alertdialog.show()
             }
         })
 
-        holder.favorite_constrain_layout.setOnClickListener(object: View.OnClickListener{
+        holder.favoriteConstrainLayout.setOnClickListener(object: View.OnClickListener{
             override fun onClick(p0: View?) {
-                openFavortie(favouriteList.get(holder.adapterPosition))
+                openFavorite(favouriteList[holder.adapterPosition])
             }
         })
 
@@ -66,23 +66,23 @@ class FavoriteAdapter (private val favouriteList : List<Favorite>, private val c
     }
 
     inner class ViewHolder(val item : View) : RecyclerView.ViewHolder(item) {
-        val favorite_name_tv : TextView
+        val favoriteName : TextView
             get() = item.findViewById(R.id.favortie_name_tv)
 
-        val favorite_delete : ImageView
+        val favoriteDelete : ImageView
         get() = item.findViewById(R.id.favorite_delete)
 
-        val favorite_constrain_layout : ConstraintLayout
+        val favoriteConstrainLayout : ConstraintLayout
         get() = item.findViewById(R.id.favorite_constrainl_layout)
 
 
     }
 
-    fun returnLocation(favorite: Favorite) : String{
+    private fun returnLocation(favorite: Favorite) : String{
         var city : String = ""
         var country :String = ""
         val gcd = Geocoder(context, Locale.getDefault())
-        var address: List<Address>?
+        val address: List<Address>?
         try {
             address = gcd.getFromLocation(favorite.favourite_latitude , favorite.favourite_longitude ,2)
             city = address[0].locality
@@ -93,18 +93,9 @@ class FavoriteAdapter (private val favouriteList : List<Favorite>, private val c
         return city+", "+country
     }
 
-    fun deleteFavourite(favorite: Favorite) {
-         lateinit var repo: FavoriteRepo
-
-         GlobalScope.launch {
-             repo = FavoriteRepo(WeatherDataBase.getInstance(context).getWeatherDao())
-             repo.deleteFavoriteItem(favorite)
-         }
-     }
-
-    fun openFavortie(favorite: Favorite){
-        var app : AppCompatActivity = context as AppCompatActivity
-        var home = ShowFavoriteFragment(favorite)
+    private fun openFavorite(favorite: Favorite){
+        val app : AppCompatActivity = context as AppCompatActivity
+        val home = ShowFavoriteFragment(favorite)
         app.supportFragmentManager.beginTransaction().add(R.id.container,home).addToBackStack("null").commit()
     }
 

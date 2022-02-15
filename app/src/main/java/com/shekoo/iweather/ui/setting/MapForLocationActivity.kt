@@ -47,7 +47,7 @@ class MapForLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
+        val sydney = LatLng(60.7392, 8.3568)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
@@ -75,8 +75,8 @@ class MapForLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onDestroy() {
         super.onDestroy()
         val sharedPreferences: SharedPreferences = applicationContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-        var location: String? = sharedPreferences.getString(LOCATION, "gps")
-        var long: String? = sharedPreferences.getString(LONGITUDE, "0.0")
+        val location: String? = sharedPreferences.getString(LOCATION, "gps")
+        val long: String? = sharedPreferences.getString(LONGITUDE, "0.0")
         Log.i(TAG, "ondes: " + location)
         Log.i(TAG, "ondes: " + long)
 

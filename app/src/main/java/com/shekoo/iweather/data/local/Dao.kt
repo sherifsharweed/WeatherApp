@@ -7,6 +7,7 @@ import androidx.room.*
 import androidx.room.Dao
 import com.shekoo.iweather.model.Favorite
 import com.shekoo.iweather.model.MyAlert
+import retrofit2.http.DELETE
 
 @Dao
 interface Dao {
@@ -29,6 +30,9 @@ interface Dao {
 
     @Delete
     suspend fun deleteAlarmItem(alert: MyAlert)
+
+    @Query("DELETE FROM alert_list WHERE first = :first")
+    suspend fun deleteSpecificAlarm(first : Long )
 
     @Query("SELECT * FROM alert_list")
     fun getAllAlerts() : LiveData<List<MyAlert>>

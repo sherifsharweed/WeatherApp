@@ -1,5 +1,6 @@
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
+import com.shekoo.iweather.model.Alerts
 
 /*
 Copyright (c) 2022 Kotlin Data Classes Generated from JSON powered by http://www.json2kotlin.com
@@ -21,5 +22,6 @@ data class WeatherResponse (
 	@SerializedName("timezone_offset") val timezone_offset : Int,
 	@SerializedName("current") val current : Current,
 	@SerializedName("hourly") val hourly : List<Hourly>,
-	@SerializedName("daily") val daily : List<Daily>
+	@SerializedName("daily") val daily : List<Daily>,
+	@SerializedName("alerts") val alerts : List<Alerts>
 )
