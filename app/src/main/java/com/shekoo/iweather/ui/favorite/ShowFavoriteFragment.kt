@@ -1,7 +1,6 @@
 package com.shekoo.iweather.ui.favorite
 
-import Daily
-import Hourly
+import com.shekoo.iweather.model.Hourly
 import android.content.Context
 import android.content.SharedPreferences
 import android.location.Address
@@ -12,13 +11,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.shekoo.iweather.R
 import com.shekoo.iweather.databinding.FragmentHomeBinding
+import com.shekoo.iweather.model.Daily
 import com.shekoo.iweather.model.Favorite
 import com.shekoo.iweather.ui.*
 import com.shekoo.iweather.ui.home.DailyAdapter

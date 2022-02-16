@@ -1,30 +1,19 @@
 package com.shekoo.iweather.ui.alert
 
 import android.app.AlertDialog
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.media.MediaPlayer
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.shekoo.iweather.R
 import com.shekoo.iweather.model.Alerts
 import com.shekoo.iweather.ui.*
-import com.shekoo.iweather.ui.favorite.FavoriteViewModelFactory
-import com.shekoo.iweather.ui.home.HomeViewModel
 import java.util.*
 
 class DialogActivity : AppCompatActivity() {
@@ -76,7 +65,7 @@ class DialogActivity : AppCompatActivity() {
         val alertdialog = AlertDialog.Builder(this)
         alertdialog.setCancelable(false) // that make the dialog cant cancelled until u click inside the dialog itself
 
-        alertdialog.setTitle("Weather")
+        alertdialog.setTitle("com.shekoo.iweather.model.Weather")
         alertdialog.setMessage(textforalarm)
 
         alertdialog.setNegativeButton("OK") { dialogInterface, i ->

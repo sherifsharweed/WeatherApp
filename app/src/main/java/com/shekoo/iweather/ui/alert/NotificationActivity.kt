@@ -39,8 +39,10 @@ class NotificationActivity : AppCompatActivity() {
         val alertViewModelFactory = AlertViewModelFactory(applicationContext)
         alertViewModel = ViewModelProvider(this,alertViewModelFactory).get(AlertViewModel::class.java)
         binding = ActivityNotificationBinding.inflate(layoutInflater)
-        //setContentView(binding.root)
+        setContentView(binding.root)
         var UNIX = intent.getLongExtra("KEY",0L)
+        mediaPlayer = MediaPlayer.create(this, Settings.System.DEFAULT_NOTIFICATION_URI)
+        mediaPlayer.start()
         initViews()
         createNotificationChannel()
 
@@ -64,9 +66,7 @@ class NotificationActivity : AppCompatActivity() {
             }
         })
 
-        setContentView(binding.root)
-        mediaPlayer = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI)
-        mediaPlayer.start()
+        //setContentView(binding.root)
 
         binding.notificationOkButton.setOnClickListener {
             alertViewModel.deleteSpecificAlarm(UNIX)
@@ -96,7 +96,7 @@ class NotificationActivity : AppCompatActivity() {
             // Create a NotificationChannel with ID that declared above and name that name for
             // the notification setting in app setting ,, importance high for shows everywhere, makes noise and peeks.
             val notificationChannel = NotificationChannel(PRIMARY_CHANNEL_ID,
-                "Weather Notification", NotificationManager.IMPORTANCE_HIGH)
+                "com.shekoo.iweather.model.Weather Notification", NotificationManager.IMPORTANCE_DEFAULT)
             //set up setting for notification of this channel
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.RED

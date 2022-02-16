@@ -1,15 +1,13 @@
 package com.shekoo.iweather.ui.home
 
-import WeatherResponse
-import android.util.Log
-import androidx.lifecycle.LiveData
+import com.shekoo.iweather.model.WeatherResponse
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.shekoo.iweather.data.local.WeatherDataBase
 import com.shekoo.iweather.repo.WeatherRepo
-import com.shekoo.iweather.ui.TAG
-import org.intellij.lang.annotations.Language
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel() : ViewModel() {
 
     var weatherLiveData = MutableLiveData<WeatherResponse>()
 

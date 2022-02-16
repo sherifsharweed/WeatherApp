@@ -1,6 +1,6 @@
 package com.shekoo.iweather.data.remote
 
-import WeatherResponse
+import com.shekoo.iweather.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

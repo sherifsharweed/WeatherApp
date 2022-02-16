@@ -1,16 +1,16 @@
 package com.shekoo.iweather.data.local
 
-import Daily
-import Hourly
-import Weather
+import com.shekoo.iweather.model.Hourly
+import com.shekoo.iweather.model.Weather
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.shekoo.iweather.model.Alerts
+import com.shekoo.iweather.model.Daily
 import java.lang.reflect.Type
 
 
-object DataConverter {
+class DataConverter {
 
     @TypeConverter
     fun hourlyListToString(hourlyList: List<Hourly>?): String? {

@@ -1,33 +1,21 @@
 package com.shekoo.iweather.ui.alert
 
-import WeatherResponse
+import com.shekoo.iweather.model.WeatherResponse
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.shekoo.iweather.data.local.WeatherDataBase
 import com.shekoo.iweather.databinding.FragmentAlertBinding
-import com.shekoo.iweather.databinding.FragmentSettingBinding
-import com.shekoo.iweather.model.Alerts
-import com.shekoo.iweather.model.Favorite
 import com.shekoo.iweather.model.MyAlert
-import com.shekoo.iweather.repo.AlertRepo
 import com.shekoo.iweather.ui.*
-import com.shekoo.iweather.ui.alert.AlertViewModel
-import com.shekoo.iweather.ui.favorite.FavoriteAdapter
-import com.shekoo.iweather.ui.favorite.MapsActivity
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class AlertFragment : Fragment() {
 

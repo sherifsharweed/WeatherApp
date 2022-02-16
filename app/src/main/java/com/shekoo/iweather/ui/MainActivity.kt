@@ -38,8 +38,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain2.toolbar)
 
-
-
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main2)
@@ -53,24 +51,7 @@ class MainActivity : AppCompatActivity() {
        //////////get location permissions
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         myLocationListener = MyLocationListener(this)
-/*
-        val sharedPreferences: SharedPreferences = applicationContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-        var location : String? = sharedPreferences.getString(LOCATION,"gps")
-        if(location =="gps"){
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            {
-                ActivityCompat.requestPermissions(this, PERMISSIONS, LOCATION_CODE)
-                return
-            }else{
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F,myLocationListener)
-            }
-        }else{
-                locationManager.removeUpdates(myLocationListener)
-            }
-        //////////////
-       // checkLocale()
-*/
+
     }
 
 

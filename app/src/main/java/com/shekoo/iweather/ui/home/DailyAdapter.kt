@@ -1,6 +1,5 @@
 package com.shekoo.iweather.ui.home
 
-import Daily
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.LayoutInflater
@@ -11,12 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shekoo.iweather.R
+import com.shekoo.iweather.model.Daily
 import com.shekoo.iweather.ui.FILE_NAME
 import com.shekoo.iweather.ui.TEMPDEGREE
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DailyAdapter (private val dailyTemp : List<Daily> , private val context : Context) : RecyclerView.Adapter<DailyAdapter.ViewHolder>() {
+class DailyAdapter (private val dailyTemp : List<Daily>, private val context : Context) : RecyclerView.Adapter<DailyAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.daily_item,parent,false)
         return ViewHolder(view)

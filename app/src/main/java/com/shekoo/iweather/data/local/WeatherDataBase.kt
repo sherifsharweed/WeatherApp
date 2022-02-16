@@ -1,14 +1,13 @@
 package com.shekoo.iweather.data.local
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import com.shekoo.iweather.model.Favorite
 import com.shekoo.iweather.model.MyAlert
+import com.shekoo.iweather.model.WeatherResponse
 
-@Database(entities = [Favorite::class,MyAlert::class], version = 2)
-
+@Database(entities = [Favorite::class,MyAlert::class], version = 1)
+@TypeConverters(DataConverter::class)
 abstract class WeatherDataBase : RoomDatabase() {
 
     abstract fun getWeatherDao() : Dao

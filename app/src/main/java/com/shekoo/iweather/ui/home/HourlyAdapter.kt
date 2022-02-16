@@ -1,6 +1,6 @@
 package com.shekoo.iweather.ui.home
 
-import Hourly
+import com.shekoo.iweather.model.Hourly
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import com.shekoo.iweather.ui.TEMPDEGREE
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HourlyAdapter (private val hourlyTemp : List<Hourly> , private val context : Context) :
+class HourlyAdapter (private val hourlyTemp : List<Hourly>, private val context : Context) :
     RecyclerView.Adapter<HourlyAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
