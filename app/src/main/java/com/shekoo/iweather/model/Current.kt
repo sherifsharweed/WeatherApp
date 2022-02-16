@@ -1,3 +1,5 @@
+package com.shekoo.iweather.model
+
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 

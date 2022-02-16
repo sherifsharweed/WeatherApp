@@ -1,18 +1,18 @@
 package com.shekoo.iweather.data.local
 
-import android.service.autofill.LuhnChecksumValidator
+import com.shekoo.iweather.model.WeatherResponse
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import androidx.room.Dao
 import com.shekoo.iweather.model.Favorite
 import com.shekoo.iweather.model.MyAlert
-import retrofit2.http.DELETE
 
 @Dao
 interface Dao {
 
-
+    //weatherresponse
+    /*@Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertWeatherResponse(weatherResponse: WeatherResponse)*/
 
     //favorites
     @Insert()

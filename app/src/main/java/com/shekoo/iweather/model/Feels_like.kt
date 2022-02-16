@@ -1,3 +1,5 @@
+package com.shekoo.iweather.model
+
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
@@ -12,7 +14,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-@Entity(tableName = "feelslike_table")
+//@Entity(tableName = "feelslike_table")
 data class Feels_like (
 
 	@SerializedName("day") val day : Double,

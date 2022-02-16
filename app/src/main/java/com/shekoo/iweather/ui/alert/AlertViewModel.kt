@@ -1,6 +1,6 @@
 package com.shekoo.iweather.ui.alert
 
-import WeatherResponse
+import com.shekoo.iweather.model.WeatherResponse
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

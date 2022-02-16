@@ -1,18 +1,18 @@
 package com.shekoo.iweather.repo
 
-import WeatherResponse
-import android.content.Context
+import com.shekoo.iweather.model.WeatherResponse
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.shekoo.iweather.data.local.WeatherDataBase
+import com.shekoo.iweather.data.local.Dao
 import com.shekoo.iweather.data.remote.API_KEY
 import com.shekoo.iweather.data.remote.EXCLUDE
 import com.shekoo.iweather.data.remote.RetrofitClient
-import com.shekoo.iweather.model.Favorite
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
-class WeatherRepo {
+class WeatherRepo() {
     private val TAG = "main"
     val weatherLiveData = MutableLiveData<WeatherResponse>()
 

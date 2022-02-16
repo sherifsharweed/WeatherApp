@@ -1,10 +1,7 @@
 package com.shekoo.iweather.ui.home
 
-import Daily
-import Hourly
+import com.shekoo.iweather.model.Hourly
 import android.Manifest
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -24,11 +21,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
-import com.shekoo.iweather.R
 import com.shekoo.iweather.databinding.FragmentHomeBinding
-import com.shekoo.iweather.model.Favorite
-import com.shekoo.iweather.repo.FavoriteRepo
+import com.shekoo.iweather.model.Daily
 import com.shekoo.iweather.ui.*
 import java.io.IOException
 import java.text.SimpleDateFormat

@@ -42,8 +42,6 @@ class FavoriteFragment : Fragment() {
         recyclerView.layoutManager = layoutManagerForFavorite
 
         binding.fab.setOnClickListener { view ->
-            /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()*/
             val intent = Intent(context, MapsActivity::class.java)
             startActivity(intent)
         }

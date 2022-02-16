@@ -1,5 +1,6 @@
 package com.shekoo.iweather.model
 
+import androidx.room.Ignore
 import com.google.gson.annotations.SerializedName
 
 data class Alerts (
@@ -9,5 +10,7 @@ data class Alerts (
     @SerializedName("start") val start : Int,
     @SerializedName("end") val end : Int,
     @SerializedName("description") val description : String,
-    @SerializedName("tags") val tags : List<String>
+    @SerializedName("tags")
+    @Ignore
+    val tags : List<String>
 )
