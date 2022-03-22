@@ -12,7 +12,7 @@ An application for weather :
 
 2- The application predicts the weather throughout the day and week.
 
-3- User can add favorite places to his favorite list and get the forecast for this places.
+3- User can add favorite places to his favorite list and get the forecast for these places.
 
 4- User can add alerts for any weather alert come from API.
 
