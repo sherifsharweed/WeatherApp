@@ -33,7 +33,7 @@ It is a single module project architecture. And, I'm following the Clean Archite
 
 4- Retrofit : for making calls from API.
 
-5- WorkManager : for scheduling backgroung services and broadcast.
+5- WorkManager : for scheduling background services and broadcast.
 
 6- Navigation.
 
