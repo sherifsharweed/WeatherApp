@@ -1,4 +1,11 @@
 # WeatherApp
+<img src="https://github.com/sherifsharweed/WeatherApp/blob/main/pic/Capture1.PNG" width="280" height="450" /><img src="https://github.com/sherifsharweed/WeatherApp/blob/main/pic/Capture2.PNG" width="280" height="450" />
+<img src="https://github.com/sherifsharweed/WeatherApp/blob/main/pic/Capture3.PNG" width="280" height="450" />
+<img src="https://github.com/sherifsharweed/WeatherApp/blob/main/pic/Capture4.PNG" width="280" height="450" />
+<img src="https://github.com/sherifsharweed/WeatherApp/blob/main/pic/Capture5.PNG" width="280" height="450" />
+<img src="https://github.com/sherifsharweed/WeatherApp/blob/main/pic/Capture6.PNG" width="280" height="450" />
+<img src="https://github.com/sherifsharweed/WeatherApp/blob/main/pic/Capture7.PNG" width="280" height="450" />
+
 An application for weather :
 
 1- User can select his location by mobile location or choose his location from google maps.
