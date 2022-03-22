@@ -29,6 +29,8 @@ It is a single module project architecture. And, I'm following the Clean Archite
 
 5- WorkManager : for scheduling backgroung services and broadcast.
 
+6- Navigation.
+
 # API Services 
  Weather API
  
