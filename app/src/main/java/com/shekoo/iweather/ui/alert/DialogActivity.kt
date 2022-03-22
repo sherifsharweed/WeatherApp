@@ -65,7 +65,7 @@ class DialogActivity : AppCompatActivity() {
         val alertdialog = AlertDialog.Builder(this)
         alertdialog.setCancelable(false) // that make the dialog cant cancelled until u click inside the dialog itself
 
-        alertdialog.setTitle("com.shekoo.iweather.model.Weather")
+        alertdialog.setTitle("iWeather")
         alertdialog.setMessage(textforalarm)
 
         alertdialog.setNegativeButton("OK") { dialogInterface, i ->

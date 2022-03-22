@@ -1,0 +1,5 @@
+    compileSdk 32
+        minSdk 21
+
+
+https://github.com/sherifsharweed/weather

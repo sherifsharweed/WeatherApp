@@ -86,7 +86,7 @@ class AddAlertActivity : AppCompatActivity() {
                 val calendarnow = Calendar.getInstance()
                 val calendarMillies = calendarnow.timeInMillis / 1000L
 
-                if (firstUNIX < calendarMillies || secondUNIX < calendarMillies) {
+                if (firstUNIX < calendarMillies || secondUNIX < calendarMillies|| firstUNIX > secondUNIX) {
                     Toast.makeText(applicationContext, "Error in selecting date", Toast.LENGTH_SHORT).show()
                 } else {
                     alertViewModel.insertAlarmItem(MyAlert(firstUNIX, secondUNIX))
